@@ -50,8 +50,8 @@ class UtilsJWT:
     @staticmethod
     def token_required(roles=None):
         roles: list = ValidatorsJWT.ValidateListRolesOnTokenRequired(roles=roles)
-        def wrapper(f):
-            @wraps(f)
+        def wrapper(function):
+            @wraps(function)
             def decorated(*args, **kwargs):
                 try:
                     decoded_token = UtilsJWT.validateToken(request)
@@ -63,7 +63,7 @@ class UtilsJWT:
                 except Exception as e:
                     raise ExceptionRoleNotPermittedError(e)
 
-                return f(*args, **kwargs)
+                return function(*args, **kwargs)
 
             return decorated
         return wrapper
