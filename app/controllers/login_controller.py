@@ -5,7 +5,7 @@ from app.models.user_entity import UserEntity
 from app.service.user_entity_services import UserEntityService
 from app.utils.utils import UtilsJWT
 
-login_route: Blueprint = Blueprint("login", __name__, url_prefix="/login")
+login_route: Blueprint = Blueprint("/login/", __name__, url_prefix="/login/")
 
 class LogingController:
 
@@ -21,4 +21,4 @@ class LogingController:
             data=UtilsJWT.generatedToken(user=user_authenticated)
         )
 
-        return jsonify(response_data.getJson()), 200
+        return jsonify(response_data.getJSON()), 200

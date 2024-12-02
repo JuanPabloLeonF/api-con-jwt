@@ -4,7 +4,7 @@ from app.models.response_data import ResponseData
 from app.service.user_entity_services import UserEntityService
 from app.utils.utils import UtilsJWT
 
-user_route: Blueprint = Blueprint("user", __name__, url_prefix="/user")
+user_route: Blueprint = Blueprint("/user/", __name__, url_prefix="/user/")
 
 class UserEntityController:
 
@@ -19,7 +19,7 @@ class UserEntityController:
             data=listData
         )
 
-        return jsonify(response_data.getJson()), 200
+        return jsonify(response_data.getJSON()), 200
 
     @staticmethod
     @user_route.route(rule="/", methods=["POST"])
@@ -33,4 +33,4 @@ class UserEntityController:
             data=UserEntityService.create(request_data)
         )
 
-        return jsonify(response_data.getJson()), 201
+        return jsonify(response_data.getJSON()), 201
